@@ -25,7 +25,7 @@ def user_loader(username):
     connection = sqlite3.connect("falihax.db")
     connection.row_factory = sqlite3.Row
     cursor = connection.cursor()
-    cursor.execute("select * from users where username=?", str(username))
+    cursor.execute("select * from users where username=?", (str(username),))
     account = cursor.fetchone()
     connection.close()
     if not account:
@@ -43,7 +43,7 @@ def request_loader(request):
     connection = sqlite3.connect("falihax.db")
     connection.row_factory = sqlite3.Row
     cursor = connection.cursor()
-    cursor.execute("select * from users where username=?", str(username))
+    cursor.execute("select * from users where username=?", (str(username),))
     account = cursor.fetchone()
     connection.close()
     if not account:
@@ -114,7 +114,7 @@ def login():
     connection = sqlite3.connect("falihax.db")
     connection.row_factory = sqlite3.Row
     cursor = connection.cursor()
-    cursor.execute("select password from users where username=?", str(username))
+    cursor.execute("select password from users where username=?", (str(username), ))
     password_row = cursor.fetchone()
     connection.close()
 
@@ -158,7 +158,7 @@ def signup():
     connection = sqlite3.connect("falihax.db")
     connection.row_factory = sqlite3.Row
     cursor = connection.cursor()
-    cursor.execute("select * from users where username=?", str(username))
+    cursor.execute("select * from users where username=?", (str(username), ))
     row = cursor.fetchone()
     connection.close()
 
@@ -325,7 +325,7 @@ def admin():
     connection = sqlite3.connect("falihax.db")
     connection.row_factory = sqlite3.Row
     cursor = connection.cursor()
-    cursor.execute("select * from users where username=?", str(username))
+    cursor.execute("select * from users where username=?", (str(username),))
     row = cursor.fetchone()
     connection.close()
 
@@ -357,7 +357,7 @@ def get_accounts(username: str) -> List[Dict[str, str]]:
     connection.row_factory = sqlite3.Row
     cursor = connection.cursor()
     cursor.execute(
-        "select sort_code, account_number, account_name from bank_accounts where username=?", str(username))
+        "select sort_code, account_number, account_name from bank_accounts where username=?", (str(username),))
     rows = cursor.fetchall()
     connection.close()
 
@@ -404,7 +404,7 @@ def dashboard():
     connection.row_factory = sqlite3.Row
     cursor = connection.cursor()
     credit_score = int(
-        cursor.execute("select credit_score from users where username=?", username).fetchone()[0])
+        cursor.execute("select credit_score from users where username=?", (username, )).fetchone()[0])
     connection.close()
     # Retrieves the current user's username from the session and gets their accounts
     return render_template("dashboard.html", accounts=get_accounts(flask_login.current_user.id), credit_score=credit_score)
