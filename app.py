@@ -13,7 +13,7 @@ import secrets
 from flask_login import current_user
 
 app = Flask(__name__)
-app.secret_key = 'hello'
+app.secret_key = '/?<C@($maA[{1?ISjCJ(Sb>j'
 login_manager = flask_login.LoginManager()
 navbar_page_names = dict()
 
@@ -319,6 +319,8 @@ def make_transaction():
 @app.route('/admin', methods=['GET', 'POST'])
 @add_to_navbar("Admin", condition=lambda: current_user.is_authenticated and current_user.id == "admin")
 def admin():
+    if current_user.id != "admin":
+        return "Forbidden", 405
     """Allows admins to adjust users' credit scores"""
     # Returns a credit score form when the user navigates to the page
     if request.method == 'GET':
