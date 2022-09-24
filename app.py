@@ -196,19 +196,24 @@ def signup():
 def open_account():
     """Used to open a bank account for the current user"""
     # Returns an account selection form when the user navigates to the page
+    company_name = define_name_constants()['company_name']
+    valid_accounts = [
+        f"{company_name} Super Saver",
+        f"{company_name} Credit Card",
+        f"{company_name} Help to Buy ISA",
+        f"{company_name} Current Account",
+        f"My First {company_name} Current Account (for children)",
+        f"My First {company_name} Pension Fund (for children)"
+    ]
     if request.method == 'GET':
-        company_name = define_name_constants()['company_name']
-        return render_template("open_account.html", account_names=[
-            f"{company_name} Super Saver",
-            f"{company_name} Credit Card",
-            f"{company_name} Help to Buy ISA",
-            f"{company_name} Current Account",
-            f"My First {company_name} Current Account (for children)",
-            f"My First {company_name} Pension Fund (for children)"
-        ])
+        return render_template("open_account.html", account_names=valid_accounts)
 
     # Retrieves the account type from the form
+    if request.form['account'] not in valid_accounts:
+        flash("Invalid account type", "danger")
+        return render_template("open_account.html", account_names=valid_accounts)
     account = request.form['account']
+
 
     # Flag for sort code/account number generation
     unique = False
