@@ -7,8 +7,8 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 from codecs import encode
 import flask_login
 import sqlite3
-import random
 from werkzeug import security
+import secrets
 
 from flask_login import current_user
 
@@ -214,14 +214,14 @@ def open_account():
     unique = False
     while not unique:
         # Generates two numbers for the sort code
-        sortnum1 = random.randrange(0, 100)
-        sortnum2 = random.randrange(0, 100)
+        sortnum1 = secrets.randbelow(100)
+        sortnum2 = secrets.randbelow(100)
 
         # Creates the sort code in the correct format
         sort = "06-" + str(sortnum1).zfill(2) + "-" + str(sortnum2).zfill(2)
 
         # Generates a number for the account number
-        accnum = random.randrange(0, 100000000)
+        accnum = secrets.randbelow(100000000)
 
         # Creates the account number in the correct format
         acc = str(accnum).zfill(8)
