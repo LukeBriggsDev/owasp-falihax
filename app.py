@@ -1,6 +1,6 @@
 import base64
 import os
-from typing import Callable, Optional, List, Dict
+from typing import Callable, Optional, List, Dict, Any
 
 import werkzeug.security
 from flask import Flask, render_template, request, redirect, url_for, flash
@@ -269,6 +269,7 @@ def make_transaction():
     acc = request.form['toaccountnumber']
     usersort = request.form['fromsortcode']
     useracc = request.form['fromaccountnumber']
+
     # convert the amount to pence
     amount = int(float(request.form['amount']) * 100)
 
@@ -421,14 +422,7 @@ def dashboard():
     # Retrieves the current user's username from the session and gets their accounts
     return render_template("dashboard.html", accounts=get_accounts(flask_login.current_user.id), credit_score=credit_score)
 
-
-@app.route('/account/<sort_code>/<account_number>')
-def account(sort_code: str, account_number: str):
-    """Allows the user to view the statements for an account"""
-    # Retrieves the current user's username from the session
-    user = flask_login.current_user
-    username = user.id
-    # Attempts to retrieve any bank accounts that belong to the current user
+def username_matches_account(username: str, sort_code: str, account_no:str) -> bool:
     connection = sqlite3.connect("falihax.db")
     connection.row_factory = sqlite3.Row
     cursor = connection.cursor()
@@ -436,11 +430,26 @@ def account(sort_code: str, account_number: str):
     rows = cursor.fetchall()
     found = False
     for row in rows:
-        if row[1] == sort_code and row[2] == account_number:
+        if row[1] == sort_code and row[2] == account_no:
             found = True
     if not found:
         connection.close()
+        return False
+    connection.close()
+    return True
+
+@app.route('/account/<sort_code>/<account_number>')
+def account(sort_code: str, account_number: str):
+    """Allows the user to view the statements for an account"""
+    # Retrieves the current user's username from the session
+    user = flask_login.current_user
+    username = user.id
+    if not username_matches_account(username, sort_code, account_number):
         return redirect("/")
+    # Attempts to retrieve any bank accounts that belong to the current user
+    connection = sqlite3.connect("falihax.db")
+    connection.row_factory = sqlite3.Row
+    cursor = connection.cursor()
     cursor.execute(
         f"select * from transactions where (to_account_number == ? and to_sort_code == ?) "
         f"or (from_account_number == ? and from_sort_code == ?) order by timestamp desc;",
