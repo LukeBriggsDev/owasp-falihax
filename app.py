@@ -277,6 +277,9 @@ def make_transaction():
 
     # convert the amount to pence
     amount = int(float(request.form['amount']) * 100)
+    if amount < 0:
+        flash("Amount must be greater than 0", "danger")
+        return render_template("make_transaction.html", accounts=get_accounts(flask_login.current_user.id))
 
     # Attempts to retrieve a bank account from the database which matches the 'to' details entered
     connection = sqlite3.connect("falihax.db")
