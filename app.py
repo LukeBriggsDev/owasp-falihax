@@ -339,6 +339,16 @@ def admin():
     username = request.form['username']
     score = request.form['score']
 
+    try:
+        score = int(score)
+    except ValueError:
+        flash("Credit Score must be a number", "danger")
+        return render_template("admin.html")
+
+    if score < 0:
+        flash("Credit Score must be 0 or greater", "danger")
+        return render_template("admin.html")
+
     # Attempts to retrieve a user from the database with the username entered
     connection = sqlite3.connect("falihax.db")
     connection.row_factory = sqlite3.Row
