@@ -1,10 +1,14 @@
+import base64
+import os
 from typing import Callable, Optional, List, Dict
 
+import werkzeug.security
 from flask import Flask, render_template, request, redirect, url_for, flash
 from codecs import encode
 import flask_login
 import sqlite3
 import random
+from werkzeug import security
 
 from flask_login import current_user
 
@@ -119,7 +123,7 @@ def login():
     connection.close()
 
     # Checks that the password has been retrieved and whether it matches the password entered by the user
-    if password_row is not None and password_row[0] == encode(request.form['password'], 'rot_13'):
+    if password_row is not None and werkzeug.security.check_password_hash(password_row[0], request.form['password']):
         # Logs the user in if the details are correct
         user = User()
         user.id = username
@@ -175,8 +179,11 @@ def signup():
     connection = sqlite3.connect("falihax.db")
     connection.row_factory = sqlite3.Row
     cursor = connection.cursor()
-    # encrypt the password with rot-13 cryptography
-    cursor.execute("insert into users (username, password, fullname) values (?, ?, ?)", (str(username), encode(str(password), 'rot_13'), str(fullname)))
+
+    # hash the password with SHA-256 cryptography
+    hash = werkzeug.security.generate_password_hash(password, method='pbkdf2:sha256:480000')
+
+    cursor.execute("insert into users (username, password, fullname) values (?, ?, ?)", (str(username), hash, str(fullname)))
     connection.commit()
     connection.close()
     # Redirects to login page
