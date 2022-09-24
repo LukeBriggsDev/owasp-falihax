@@ -428,11 +428,19 @@ def account(sort_code: str, account_number: str):
     # Retrieves the current user's username from the session
     user = flask_login.current_user
     username = user.id
-
     # Attempts to retrieve any bank accounts that belong to the current user
     connection = sqlite3.connect("falihax.db")
     connection.row_factory = sqlite3.Row
     cursor = connection.cursor()
+    cursor.execute("select * from bank_accounts where username == ?", (username,))
+    rows = cursor.fetchall()
+    found = False
+    for row in rows:
+        if row[1] == sort_code and row[2] == account_number:
+            found = True
+    if not found:
+        connection.close()
+        return redirect("/")
     cursor.execute(
         f"select * from transactions where (to_account_number == ? and to_sort_code == ?) "
         f"or (from_account_number == ? and from_sort_code == ?) order by timestamp desc;",
