@@ -8,21 +8,21 @@
 - No password complexity requirement
 - No logging for secuirty events (login, registration, password failure)
 - Vulnerable to SQL injection by not using prepared statements
-	- Fixed [here](commit/51757ee526e42201e4ec316e64c3f4a95ff36c19) and [here](commit/d9f2ac0c22a95c44c5df5084f0fd392ae63ac71a)
+	- Fixed [here](https://github.com/LukeBriggsDev/owasp-falihax/commit/51757ee526e42201e4ec316e64c3f4a95ff36c19) and [here](commit/d9f2ac0c22a95c44c5df5084f0fd392ae63ac71a)
 - Passwords not hashed and salted (uses weak rot13)
-	- Fixed [here](commit/d86c1663876afca48d6d15598795b3b04f9ea873)
+	- Fixed [here](https://github.com/LukeBriggsDev/owasp-falihax/commit/d86c1663876afca48d6d15598795b3b04f9ea873)
 - Sort code and account number generated using non CSPRNG, might lead to an attacker being able to guess a user's account details
-	- Fixed [here](commit/85dcdad0e35cc297a65dbf6802e8e0f93cd5c253)
+	- Fixed [here](https://github.com/LukeBriggsDev/owasp-falihax/commit/85dcdad0e35cc297a65dbf6802e8e0f93cd5c253)
 - Any user can visit the admin page
-	- Fixed [here](commit/6dff0feb13d255abe5e8661669b6fe43003ac353)
+	- Fixed [here](https://github.com/LukeBriggsDev/owasp-falihax/commit/6dff0feb13d255abe5e8661669b6fe43003ac353)
 - Any user can access any other user's transaction page
-	- Fixed [here](commit/89015d8ab789c326cc7866cc23ac684a8e69b986)
+	- Fixed [here](https://github.com/LukeBriggsDev/owasp-falihax/commit/89015d8ab789c326cc7866cc23ac684a8e69b986)
 - Correct name for an account is only checked at the client side
-	- Fixed [here](commit/43c60628f79757080b063ebcdbb4b5e0df9f3dad)
+	- Fixed [here](https://github.com/LukeBriggsDev/owasp-falihax/commit/43c60628f79757080b063ebcdbb4b5e0df9f3dad)
 - Transactions can have a negative value, allowing anyone to pay themselves money from any account
-	- Fixed [here](commit/d0cf14043d5204cdcedc32bcb47a614106d9b8d3)
+	- Fixed [here](https://github.com/LukeBriggsDev/owasp-falihax/commit/d0cf14043d5204cdcedc32bcb47a614106d9b8d3)
 - The validation for credit score is only validated at the client side
-	- Fixed [here](commit/58b3f362e5885cf8f287c91a06b1d7af3d96737a)
+	- Fixed [here](https://github.com/LukeBriggsDev/owasp-falihax/commit/58b3f362e5885cf8f287c91a06b1d7af3d96737a)
 
 ## Premise
 Falihax is a brand new, 100%* real and secure banking company. Last year, they
