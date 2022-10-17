@@ -8,7 +8,7 @@
 - App is run in debug mode
 - No login brute force limit
 - No password complexity requirement
-- No logging for secuirty events (login, registration, password failure)
+- No logging for security events (login, registration, password failure)
 - Vulnerable to SQL injection by not using prepared statements
 	- Fixed [here](https://github.com/LukeBriggsDev/owasp-falihax/commit/51757ee526e42201e4ec316e64c3f4a95ff36c19) and [here](commit/d9f2ac0c22a95c44c5df5084f0fd392ae63ac71a)
 - Passwords not hashed and salted (uses weak rot13)
