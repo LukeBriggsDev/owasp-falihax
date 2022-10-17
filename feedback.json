@@ -1,0 +1,168 @@
+{
+  "repo": "LukeBriggsDev/owasp-falihax",
+  "summary": "A great project, with clearly a huge amount of effort put in! You were able to notice many of the subtle vulnerabilities we left in there that not everyone could!",
+  "found_vulns": [
+    {
+      "id": "A01-02",
+      "marks": {
+        "state": true,
+        "show": false,
+        "demo": false,
+        "mitigate": false,
+        "attempt": true,
+        "works": true,
+        "explain": false
+      },
+      "commit": "89015d8ab789c326cc7866cc23ac684a8e69b986",
+      "note": "In e69b986 you fix this bug successfully, however it would have been more efficient to use the existing [`get_accounts()`](https://github.com/LukeBriggsDev/owasp-falihax/blob/094245dde0e14bd3e1f90e42a265fa5a0e586d2f/app.py#L377-L422) function to save yourself some work here!"
+    },
+    {
+      "id": "A01-03",
+      "marks": {
+        "state": true,
+        "show": false,
+        "demo": false,
+        "mitigate": false,
+        "attempt": true,
+        "works": true,
+        "explain": false
+      },
+      "commit": "6dff0feb13d255abe5e8661669b6fe43003ac353"
+    },
+    {
+      "id": "A02-01",
+      "marks": {
+        "state": true,
+        "show": false,
+        "demo": false,
+        "mitigate": false,
+        "attempt": true,
+        "works": true,
+        "explain": false
+      },
+      "commit": "d86c1663876afca48d6d15598795b3b04f9ea873"
+    },
+    {
+      "id": "A02-02",
+      "marks": {
+        "state": true,
+        "show": false,
+        "demo": false,
+        "mitigate": false,
+        "attempt": true,
+        "works": true,
+        "explain": false
+      },
+      "commit": "85dcdad0e35cc297a65dbf6802e8e0f93cd5c253"
+    },
+    {
+      "id": "A03-01",
+      "marks": {
+        "state": true,
+        "show": false,
+        "demo": false,
+        "mitigate": false,
+        "attempt": true,
+        "works": true,
+        "explain": false
+      },
+      "commit": "51757ee526e42201e4ec316e64c3f4a95ff36c19"
+    },
+    {
+      "id": "A04-02",
+      "marks": {
+        "state": true,
+        "show": false,
+        "demo": false,
+        "mitigate": false,
+        "attempt": false,
+        "works": false,
+        "explain": false
+      }
+    },
+    {
+      "id": "A04-03",
+      "marks": {
+        "state": true,
+        "show": false,
+        "demo": false,
+        "mitigate": false,
+        "attempt": false,
+        "works": false,
+        "explain": false
+      }
+    },
+    {
+      "id": "A05-01",
+      "marks": {
+        "state": false,
+        "show": false,
+        "demo": false,
+        "mitigate": false,
+        "attempt": true,
+        "works": true,
+        "explain": false
+      },
+      "commit": "6dff0feb13d255abe5e8661669b6fe43003ac353"
+    },
+    {
+      "id": "A05-02",
+      "marks": {
+        "state": true,
+        "show": false,
+        "demo": false,
+        "mitigate": false,
+        "attempt": false,
+        "works": false,
+        "explain": false
+      }
+    },
+    {
+      "id": "A08-01",
+      "marks": {
+        "state": true,
+        "show": false,
+        "demo": false,
+        "mitigate": false,
+        "attempt": true,
+        "works": true,
+        "explain": false
+      },
+      "commit": "d0cf14043d5204cdcedc32bcb47a614106d9b8d3"
+    },
+    {
+      "id": "A09-01",
+      "marks": {
+        "state": true,
+        "show": false,
+        "demo": false,
+        "mitigate": false,
+        "attempt": false,
+        "works": false,
+        "explain": false
+      }
+    },
+    {
+      "id": "B02-01",
+      "marks": {
+        "state": true,
+        "show": false,
+        "demo": false,
+        "mitigate": false,
+        "attempt": true,
+        "works": true,
+        "explain": false
+      }
+    }
+  ],
+  "additional": [
+    {
+      "name": "Nicely formatted readme",
+      "description": "Your readme file is really nicely formatted using markdown, which makes it a pleasure to read. I particularly liked your use of links to commits to show where you had fixed things, which made marking so much easier!"
+    },
+    {
+      "name": "Great commit messages",
+      "description": "Your commits are done often, and in a (mostly) atomic way which is great practice. Your commit messages are informative, accurate and concise, and really show how the progress of development well!"
+    }
+  ]
+}
